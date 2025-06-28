@@ -31,8 +31,8 @@ const ChatBox = ({ messages, setMessages, send }: ChatBoxProps) => {
           <Message key={index} message={message} index={index} />
         ))}
         <div ref={endRef} />
-        <Prompt input={input} setInput={setInput} onSend={onSend} />
       </div>
+      <Prompt input={input} setInput={setInput} onSend={onSend} />
     </div>
   );
 };
