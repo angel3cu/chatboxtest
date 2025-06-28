@@ -1,3 +1,5 @@
+import Markdown from 'react-markdown';
+
 export interface MessageProps {
   message: string;
   index: number;
@@ -15,7 +17,7 @@ const Message = ({ message, index }: MessageProps) => {
           : 'self-start bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-50'
       } rounded-md px-3 py-1`}
     >
-      {message}
+      <Markdown>{message}</Markdown>
     </div>
   );
 };
