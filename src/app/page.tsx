@@ -20,6 +20,13 @@ export default function Home() {
       return;
     }
 
+    if (response.status !== 200) {
+      const error = await response.text();
+
+      setMessages((prev) => [...prev, `Error: ${error}`]);
+      return;
+    }
+
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
 
