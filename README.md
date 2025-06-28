@@ -1,4 +1,3 @@
-
 # Coding Assessment: Chatbox Enhancement
 
 ## 🎯 Your Task
@@ -10,9 +9,12 @@ Your mission is to transform this chatbot into an extraordinary conversational a
    - What is their favorite continent?
    - What is their favorite destination?
 
-2. **General Purpose Chatbot**: Post-onboarding, the chatbot should be capable of answering questions related to world geography.
+2. **General Purpose Chatbot**: Post-onboarding, the chatbot should be capable of answering questions related to world
+   geography.
 
-3. **Creativity and Architecture**: We are looking for innovative solutions, creative flair, and robust architectural decisions. This task should take at least 1 hour, but feel free to invest more time to enhance the chatbot's capabilities.
+3. **Creativity and Architecture**: We are looking for innovative solutions, creative flair, and robust architectural
+   decisions. This task should take at least 1 hour, but feel free to invest more time to enhance the chatbot's
+   capabilities.
 
 ## 📋 Additional Notes
 
@@ -20,7 +22,8 @@ Your mission is to transform this chatbot into an extraordinary conversational a
 - Implement a streaming chatbot for the chat rendered in `page.tsx` using the `/api/stream` endpoint.
 - Leverage OpenAI npm packages, adhere to best practices, and incorporate your own design and functionality ideas.
 - Use the GPT 4.1 model.
-- Ensure the chat can onboard users, allow them to change preferences, and engage in informative conversations. (No database needed; mock data is sufficient.)
+- Ensure the chat can onboard users, allow them to change preferences, and engage in informative conversations. (No
+  database needed; mock data is sufficient.)
 
 ## ✨ Current Features
 
@@ -34,12 +37,14 @@ Your mission is to transform this chatbot into an extraordinary conversational a
 ## 🚀 How to Get Started
 
 1. Clone the repository:
+
    ```bash
    git clone git@github.com:AskVinny/chatboxtest.git
    cd chatboxtest
    ```
 
 2. Ensure the correct Node version:
+
    ```bash
    nvm install 22.15.0
    nvm use
@@ -59,4 +64,5 @@ Your mission is to transform this chatbot into an extraordinary conversational a
 
 ## 📧 Completion
 
-Once you've completed the task, please email Rory at [rory@askvinny.co.uk] to schedule a review call and discuss your implementation.
+Once you've completed the task, please email Rory at [rory@askvinny.co.uk] to schedule a review call and discuss your
+implementation.
