@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
-import Message from './ChatBox/Message';
-import Prompt from './ChatBox/Prompt';
+import Message from './Message';
+import Prompt from './Prompt';
 
 export interface ChatBoxProps {
   messages: string[];

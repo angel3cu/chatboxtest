@@ -16,7 +16,7 @@ export default class OpenAIChatbot implements Chatbot {
     const stream = await this.client.responses.create({
       model: 'gpt-4.1',
       input: message,
-      instructions: instructions,
+      instructions,
       previous_response_id: previousResponseId,
       stream: true,
     });
