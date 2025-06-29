@@ -1,10 +1,18 @@
 'use client';
+
 import { useState, useRef, useEffect } from 'react';
 import ChatBox from './components/ChatBox';
+import { v7 as uuid } from 'uuid';
 
 export default function Home() {
+  const [userId, setUserId] = useState<string | null>(null);
   const [messages, setMessages] = useState<string[]>([]);
   const endRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Generate a unique user ID on page load.
+    setUserId(uuid());
+  }, []);
 
   useEffect(() => {
     endRef.current?.scrollIntoView();
@@ -14,7 +22,7 @@ export default function Home() {
     const response = await fetch('/api/stream', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message }),
+      body: JSON.stringify({ userId, message }),
     });
     if (!response.body) {
       return;
