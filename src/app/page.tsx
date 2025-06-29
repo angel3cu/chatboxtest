@@ -1,12 +1,15 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import ChatBox from './components/ChatBox';
 import { v7 as uuid } from 'uuid';
+
+import ChatBox from './components/ChatBox';
+import Preferences, { PreferencesProps } from './components/Preferences';
 
 export default function Home() {
   const [userId, setUserId] = useState<string | null>(null);
   const [messages, setMessages] = useState<string[]>([]);
+  const [properties, setProperties] = useState<PreferencesProps>({});
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -15,8 +18,25 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    fetchProperties();
     endRef.current?.scrollIntoView();
-  }, [messages]);
+  }, [Math.floor(messages.length / 2)]);
+
+  async function fetchProperties() {
+    if (!userId) {
+      return;
+    }
+
+    const response = await fetch(`/api/preferences?userId=${userId}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (!(response.ok && response.body)) {
+      return;
+    }
+
+    setProperties(await response.json());
+  }
 
   async function send(message: string) {
     const response = await fetch('/api/stream', {
@@ -28,7 +48,7 @@ export default function Home() {
       return;
     }
 
-    if (response.status !== 200) {
+    if (!response.ok) {
       const error = await response.text();
 
       setMessages((prev) => [...prev, `Error: ${error}`]);
@@ -55,5 +75,10 @@ export default function Home() {
     }
   }
 
-  return <ChatBox messages={messages} setMessages={setMessages} send={send} />;
+  return (
+    <>
+      <Preferences {...properties} />
+      <ChatBox messages={messages} setMessages={setMessages} send={send} />
+    </>
+  );
 }

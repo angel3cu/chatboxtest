@@ -8,6 +8,8 @@ const instructions =
   'You are helping the user with questions about geography. Before starting, ask the user for their favourite ' +
   'country, continent and destination. Do not talk to the user without this information. Do not answer and query ' +
   'that is not related to geography.';
+
+// NOTE: We are usign separate functions so that the preferences can be updated individually.
 const functions: ChatbotFunctions = {
   get_favourite_country: {
     instructions: "Get the user's favourite country.",
@@ -138,12 +140,6 @@ export async function POST(req: Request) {
 
     const previousResponseId = datastore.read(userId, 'previousResponseId');
     console.log(`Previous response ID for user ${userId}:`, previousResponseId);
-
-    const country = datastore.read(userId, 'country');
-    const continent = datastore.read(userId, 'continent');
-    const destination = datastore.read(userId, 'destination');
-
-    console.log(`User ${userId} preferences:`, { country, continent, destination });
 
     const stream = await chatbot.prompt(message, {
       instructions,

@@ -5,7 +5,8 @@ export const runtime = 'edge';
 const datastore = getDatastore();
 
 export async function GET(req: Request) {
-  const { userId } = await req.json();
+  const { searchParams } = new URL(req.url);
+  const userId = searchParams.get('userId');
   if (!userId) {
     return new Response('User ID is required.', { status: 400 });
   }
