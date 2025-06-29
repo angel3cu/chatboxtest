@@ -1,5 +1,5 @@
 import OpenAI from 'openai';
-import { Chatbot } from './index';
+import { Chatbot, ChatbotOptions } from './index';
 import { ChatbotReponseChunk, ChatbotResponse, ResponseType } from './types';
 
 export default class OpenAIChatbot implements Chatbot {
@@ -12,7 +12,7 @@ export default class OpenAIChatbot implements Chatbot {
     });
   }
 
-  async prompt(message: string, instructions?: string, previousResponseId?: string): Promise<ChatbotResponse> {
+  async prompt(message: string, { instructions, previousResponseId }: ChatbotOptions = {}): Promise<ChatbotResponse> {
     const stream = await this.client.responses.create({
       model: 'gpt-4.1',
       input: message,

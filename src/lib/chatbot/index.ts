@@ -1,16 +1,28 @@
 import OpenAIChatbot from './openai';
 import { ChatbotResponse } from './types';
 
-export abstract class Chatbot {
-  abstract prompt(message: string, instructions?: string, previousResponseId?: string): Promise<ChatbotResponse>;
+export interface ChatbotOptions {
+  instructions?: string;
+  previousResponseId?: string;
 }
 
-export default function getChatbot(): Chatbot {
-  switch (process.env.CHATBOT) {
-    case 'openai':
-      return new OpenAIChatbot();
+export abstract class Chatbot {
+  abstract prompt(message: string, options?: ChatbotOptions): Promise<ChatbotResponse>;
+}
 
-    default:
-      throw new Error(`Unsupported chatbot: ${process.env.CHATBOT}`);
+let chatbot: Chatbot | null = null;
+
+export default function getChatbot(): Chatbot {
+  if (!chatbot) {
+    switch (process.env.CHATBOT) {
+      case 'openai':
+        chatbot = new OpenAIChatbot();
+        break;
+
+      default:
+        throw new Error(`Unsupported chatbot: ${process.env.CHATBOT}`);
+    }
   }
+
+  return chatbot;
 }

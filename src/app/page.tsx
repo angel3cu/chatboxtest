@@ -42,6 +42,10 @@ export default function Home() {
     setMessages((prev) => [...prev, '']);
 
     for (let { value, done } = await reader.read(); !done; { value, done } = await reader.read()) {
+      if (!value) {
+        continue;
+      }
+
       ai += decoder.decode(value);
       setMessages((prev) => {
         const copy = [...prev];

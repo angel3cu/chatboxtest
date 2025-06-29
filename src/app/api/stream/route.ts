@@ -3,8 +3,11 @@ import Datastore from '@lib/datastore';
 
 export const runtime = 'edge';
 
-const datastore = new Datastore();
+const instructions =
+  'You are helping the user with questions about geography. Before starting, ask the user for their favourite country, continent and destination. Do not talk to the user without this information.';
+
 const chatbot = getChatbot();
+const datastore = new Datastore();
 
 export async function POST(req: Request) {
   try {
@@ -20,9 +23,10 @@ export async function POST(req: Request) {
     const previousResponseId = datastore.read(userId, 'previousResponseId');
     console.log(`Previous response ID for user ${userId}:`, previousResponseId);
 
-    const stream = previousResponseId
-      ? await chatbot.prompt(message, undefined, previousResponseId)
-      : await chatbot.prompt(message);
+    const stream = await chatbot.prompt(message, {
+      instructions,
+      previousResponseId,
+    });
 
     return new Response(
       stream.pipeThrough(
