@@ -25,7 +25,7 @@ const ChatBox = ({ messages, setMessages, send }: ChatBoxProps) => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 w-80 h-96 flex flex-col rounded-lg shadow-lg border bg-white dark:bg-gray-900">
+    <div className="fixed bottom-6 right-6 w-md h-2/3 flex flex-col rounded-lg shadow-lg border bg-white dark:bg-gray-900">
       <div className="flex-1 p-3 overflow-y-auto space-y-2 text-sm">
         {messages.map((message, index) => (
           <Message key={index} message={message} index={index} />
