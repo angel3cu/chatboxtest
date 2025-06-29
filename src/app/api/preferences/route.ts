@@ -1,6 +1,8 @@
 import getDatastore from '@lib/datastore';
 
-export const runtime = 'edge';
+// Using Node.js so that the Datastore is shared across the app. When a normal external database is used, we can switch
+// this to 'edge', as requested.
+export const runtime = 'nodejs';
 
 const datastore = getDatastore();
 

@@ -2,38 +2,29 @@ import getChatbot, { ChatbotFunctions } from '@lib/chatbot';
 import { ChatbotResponseChunk, FunctionResponseChunk, ResponseType } from '@lib/chatbot/response';
 import getDatastore from '@lib/datastore';
 
-export const runtime = 'edge';
+// Using Node.js so that the Datastore is shared across the app. When a normal external database is used, we can switch
+// this to 'edge', as requested.
+export const runtime = 'nodejs';
 
 const instructions =
   'You are helping the user with questions about geography. Before starting, ask the user for their favourite ' +
   'country, continent and destination. Do not talk to the user without this information. Do not answer and query ' +
   'that is not related to geography.';
 
-// NOTE: We are usign separate functions so that the preferences can be updated individually.
 const functions: ChatbotFunctions = {
   get_favourite_country: {
-    instructions: "Get the user's favourite country.",
+    instructions: "Save the user's favourite country, continent and destination.",
     properties: {
       country: {
         type: 'string',
         description: "The user's favourite country.",
         required: true,
       },
-    },
-  },
-  get_favourite_continent: {
-    instructions: "Get the user's favourite continent.",
-    properties: {
       continent: {
         type: 'string',
         description: "The user's favourite continent.",
         required: true,
       },
-    },
-  },
-  get_favourite_destination: {
-    instructions: "Get the user's favourite destination.",
-    properties: {
       destination: {
         type: 'string',
         description: "The user's favourite destination.",
