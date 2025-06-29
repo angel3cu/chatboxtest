@@ -1,4 +1,5 @@
 import getChatbot from '@lib/chatbot';
+import { ResponseType } from '@lib/chatbot/types';
 import Datastore from '@lib/datastore';
 
 export const runtime = 'edge';
@@ -35,16 +36,20 @@ export async function POST(req: Request) {
             transform(chunk, controller) {
               try {
                 switch (chunk.type) {
-                  case 'metadata':
+                  case ResponseType.METADATA:
                     datastore.write(userId, 'previousResponseId', chunk.id);
                     break;
 
-                  case 'text':
+                  case ResponseType.TEXT:
                     controller.enqueue(chunk.text);
                     break;
 
+                  case ResponseType.IMAGE:
+                    console.warn('Image data not currently handled.');
+                    break;
+
                   default:
-                    console.warn('Unknown chunk type:', chunk.type);
+                    console.warn('Unknown chunk type!');
                     break;
                 }
               } catch (error) {
