@@ -11,7 +11,7 @@ const Message = ({ message, index }: MessageProps) => {
   return (
     <div
       key={index}
-      className={`max-w-[75%] break-words ${
+      className={`max-w-[85%] break-words flex flex-col gap-2 ${
         isUserMessage
           ? 'self-end bg-blue-600 text-white'
           : 'self-start bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-50'

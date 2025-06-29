@@ -6,7 +6,7 @@ export interface PromptProps {
 
 const Prompt = ({ input, setInput, onSend }: PromptProps) => {
   return (
-    <div className="p-3 flex gap-2 w-sm">
+    <div className="p-3 flex gap-2 w-full">
       <input
         value={input}
         onChange={(e) => setInput(e.target.value)}
