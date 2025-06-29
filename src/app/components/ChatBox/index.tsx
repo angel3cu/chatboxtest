@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Message from './Message';
 import Prompt from './Prompt';
 
@@ -11,6 +11,10 @@ export interface ChatBoxProps {
 const ChatBox = ({ messages, setMessages, send }: ChatBoxProps) => {
   const endRef = useRef<HTMLDivElement>(null);
   const [input, setInput] = useState('');
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView();
+  }, [messages]);
 
   const onSend = () => {
     if (!input.trim()) {
