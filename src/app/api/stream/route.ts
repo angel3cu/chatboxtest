@@ -12,7 +12,7 @@ const instructions =
   'that is not related to geography.';
 
 const functions: ChatbotFunctions = {
-  get_favourite_country: {
+  save_favourites: {
     instructions: "Save the user's favourite country, continent and destination.",
     properties: {
       country: {
